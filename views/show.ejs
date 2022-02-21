@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../tablestyle.css" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="table_responsive">
+    <h3><a href="/add" style="color:#00bcd4;">Add Data</a></h3>
+    <table>
+          <thead>
+            <tr>
+              <th>SI</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <% let count=0 %>
+          <% if( DispatchData.length>0) {%>
+          <tbody>
+           <% for(let data of DispatchData) {%>
+            <tr>
+              <td><%= ++count%></td>
+              <td><img src="<%= data.image%>"></td>
+              <td><%= data.name%></td>
+              <td><%= data.phone%></td>
+              <td><%= data.city%></td>
+              <td>
+                <span class="action_btn">
+                  <a href="/edit/<%= data.id%>">Edit</a>
+                  <a href="/delete/<%= data.id%>">Remove</a>
+                </span>
+              </td>
+            </tr>
+        </tbody>
+    <%}} else { %>
+   <h4>No Data Available </h4>
+    <%} %>
+    </table>
+    </div>
+</body>
+</html>
