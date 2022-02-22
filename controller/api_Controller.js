@@ -13,9 +13,6 @@ message:"Execution Successful!"
 })
 }})
 }
-// exports.add_data=(req,res)=>{
-//     res.render('add')
-// }
 exports.post_data=(req,res)=>{
     const image = req.file
     const data=new FData({
@@ -46,25 +43,25 @@ exports.edit=(req,res)=>{
     console.log(err)
 })
 }
-// exports.update=(req,res)=>{
-// const ppid=req.body.p_id
-// const name=req.body.name
-// const phone=req.body.phone
-// const city=req.body.city
-// const image = req.file
-// FData.findById(ppid).then((result)=>{
-//     result.name=name
-//     result.phone=phone
-//     result.city=city
-//     result.image=image.path
-// result.save().then((rel)=>{
-//     console.log("Data updated successfully!")
-//     res.redirect('/')
-// }).catch((err)=>{
-//     console.log(err)
-// })
-// })
-// }
+exports.update=(req,res)=>{
+const ppid=req.params.p_id
+const name=req.body.name
+const phone=req.body.phone
+const city=req.body.city
+const image =req.file
+FData.findById(ppid).then((result)=>{
+    result.name=name
+    result.phone=phone
+    result.city=city
+    result.image=image && image.path ? image.path : 'upload/no-image.jpg'
+result.save().then((rel)=>{
+    console.log(rel,"Data updated successfully!")
+    res.redirect('/')
+}).catch((err)=>{
+    console.log("Error",err)
+})
+})
+}
 exports.delete=(req, res) => {
     const id = req.params.p_id
     FData.deleteOne({_id:id}).then((result) => {
